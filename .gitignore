@@ -5,6 +5,7 @@
 
 /resources
 /.idea
+.env
 
 # misc
 .DS_Store

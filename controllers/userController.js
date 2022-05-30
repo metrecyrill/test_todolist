@@ -3,9 +3,9 @@ const {User} = require('../models/')
 const bcrypt = require("bcrypt")
 const {validationResult} = require('express-validator')
 
-const generateJwt = (user_id, login) => {
+const generateJwt = (id, login) => {
   return jwt.sign(
-    {user_id, login},
+    {user_id: id, login},
     process.env.TOKEN_KEY,
     {
       expiresIn: "1h",
@@ -39,7 +39,7 @@ class UserController {
 
   async check(req, res) {
     try {
-      const token = generateJwt(req.user.id, req.user.login)
+      const token = generateJwt(req.user.user_id, req.user.login)
       return res.json({token})
     } catch (e) {
     return res.status(500).json({message: "Something is going wrong!"})
