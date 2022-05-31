@@ -17,15 +17,19 @@ const NewTask = observer(() => {
 
   const createTask = (data) => {
     const {name, email, text} = data
-    createItem(name, email, text)
+    return createItem(name, email, text)
+  }
+
+  const submit = (data, actions) => {
+    createTask(data)
       .then(() => navigate(LIST_ROUTE))
-      .catch(e => alert(e.response.data.message))
+      .catch(error => actions.setFieldError("text", error.response.data.message))
   }
 
   return (
     <Container className="w-50 mt-5">
       <Formik
-        onSubmit={data => createTask(data)}
+        onSubmit={submit}
         validationSchema={schema}
         initialValues={{
           name: '',

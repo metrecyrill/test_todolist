@@ -20,22 +20,27 @@ const Auth = observer(() => {
 
   const signIn = (data) => {
     const {login, password} = data
+    return auth(login, password)
+  };
 
-    auth(login, password)
+  const submit = (data, actions) => {
+    signIn(data)
       .then((response) => {
         user.setData(response)
         user.setIsAuth(true)
         navigate(LIST_ROUTE)
       })
-      .catch(e => alert(e.response.data.message))
-  };
+      .catch(error => {
+        actions.setFieldError("password", error.response.data.message)
+      })
+  }
 
   return (
     <Container className="d-flex justify-content-center align-items-center">
       <Card className="p-5 w-50">
         <h2 className="m-auto">Authorization</h2>
         <Formik
-          onSubmit={data => signIn(data)}
+          onSubmit={submit}
           validationSchema={schema}
           initialValues={{
             login: '',
