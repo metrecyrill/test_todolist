@@ -19,13 +19,10 @@ const EditTask = observer(() => {
   })
   }, [])
 
-  const updateTask = async () => {
-    try {
-      const response = await editItem(id, checked, text)
-      navigate(-1)
-    } catch (e) {
-      alert(e.response.data.message)
-    }
+  const updateTask = () => {
+    editItem(id, checked, text)
+      .then(() => navigate(-1))
+      .catch((e) => e.response.data.message)
   }
 
   return (
