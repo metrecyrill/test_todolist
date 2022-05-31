@@ -43,7 +43,7 @@ const List = observer(() => {
             <th className="col-1" onClick={() => useSort('name')}>Name</th>
             <th className="col-2" onClick={() => useSort('email')}>Email</th>
             <th className="col-6">Task text</th>
-            <th className="col-1" onClick={() => useSort('status')}>Status</th>
+            <th className="col-1" onClick={() => useSort('completed')}>Status</th>
             <th className="col-1">Edited</th>
             {
               user.isAuth ? <th></th> : ''
